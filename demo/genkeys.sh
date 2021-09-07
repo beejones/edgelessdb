@@ -5,5 +5,7 @@ openssl req -newkey rsa -nodes -subj '/CN=Reader' -keyout reader/key.pem -out cs
 openssl x509 -req -CA owner/ca-cert.pem -CAkey owner/ca-key.pem -CAcreateserial -in csr-reader.pem -out reader/cert.pem
 openssl req -newkey rsa -nodes -subj '/CN=Writer' -keyout writer/key.pem -out csr-writer.pem
 openssl x509 -req -CA owner/ca-cert.pem -CAkey owner/ca-key.pem -in csr-writer.pem -out writer/cert.pem
-rm csr-reader.pem csr-writer.pem
+openssl req -newkey rsa -nodes -subj '/CN=Owner' -keyout owner/key.pem -out csr-owner.pem
+openssl x509 -req -CA owner/ca-cert.pem -CAkey owner/ca-key.pem -in csr-owner.pem -out owner/cert.pem
+rm csr-reader.pem csr-writer.pem csr-owner.pem
 ./genkeys-addtomanifest.py
